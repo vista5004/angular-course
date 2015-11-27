@@ -1,43 +1,35 @@
-一、angular module controller data-bindings
 
-创建angular程序需要了解应用中的不同的组件是如何构建在一起的。把angular的应用分解成可重复使用的模块并且分清楚之间的依赖关系。
+	第一个简单的模块
+	angular.module('firstNameModule',[]);//没有添加别的依赖模块
 
-创建一个模块，angular.module(name,[])是一个函数，其中第一个参数是模块的名字，第二个参数是一个数组，用来指定填加的模块（添加的模块是当前模块所依赖的，
-如果没有依赖的话，当然就不用了。这里的第二个参数非常有用，当我们构件大型app的时候，需要把一个页面分成很多小的模块，最后需要都添加到一个最终ng-app所指定的模块上，
-这样所有的模块应用都构建再了一起，以后会根据例子来讲解。
+	angular.module('firstNameModule',['moduleA','moduleB']);//moduleA/moduleB就是firstNameModule添加依赖的模块
 
-第一个简单的模块
-angular.module('firstNameModule',[]);//没有添加别的依赖模块
+	一旦创建了一个angular模块，就可以添加不同的别的模块依赖，要把angular.module理解成创建、检索、注册组件的一个全局API，基本上就包括了angular.module的所有功能。
+	angular.module('',[])会创建并且返回一个对于本身的引用，这样在模块中附加上控制器。
 
-angular.module('firstNameModule',['moduleA','moduleB']);//moduleA/moduleB就是firstNameModule添加依赖的模块
-
-一旦创建了一个angular模块，就可以添加不同的别的模块依赖，要把angular.module理解成创建、检索、注册组件的一个全局API，基本上就包括了angular.module的所有功能。
-angular.module('',[])会创建并且返回一个对于本身的引用，这样在模块中附加上控制器。
-
-var firstModule=angular.module('firstnameModule',[]);
-firstModule.Controller('firstController',[function($scope){
-	.....
-}]);
-firstModule.directive('firstDriective',function(){
-	return {
-		....
-	}
-});
-这样做的缺陷是创建了一个全局的作用域，这样就会不可避免造成全局作用域的命名污染。
-为了避免这种情况，可以使用立即执行函数来创建一个封闭的命名空间，也相当于创建一个类
-(function(){
-	var firstModule=angular.module('firstModule',[]);
-	firstModule.controller('firstController',function($scope){
-		....
-	});
-	firstModule.directive('firstDirective',function(){
-		return{
-			..../
+	var firstModule=angular.module('firstnameModule',[]);
+	firstModule.Controller('firstController',[function($scope){
+		.....
+	}]);
+	firstModule.directive('firstDriective',function(){
+		return {
+			....
 		}
-	})
-})()
-	这样当函数创建时就立即被执行。这个firstModule没有添加到全局作用域变量中，这样避免了全局作用域污染。
-	当angular.module()里有两个参数的时候，第二个参数为依赖的参数，当然也可以使用一个参数，一个参数的含义就是用来建设模块的名字
+	});
+	这样做的缺陷是创建了一个全局的作用域，这样就会不可避免造成全局作用域的命名污染。
+	为了避免这种情况，可以使用立即执行函数来创建一个封闭的命名空间，也相当于创建一个类
+	(function(){
+		var firstModule=angular.module('firstModule',[]);
+		firstModule.controller('firstController',function($scope){
+			....
+		});
+		firstModule.directive('firstDirective',function(){
+			return{
+				..../
+			}
+		})
+	})()
+	
 	angular.module('firstModule',[]);//
 	angular.module('firstModule').controller('firstController',function($scope){
 	
@@ -47,14 +39,14 @@ firstModule.directive('firstDriective',function(){
 			....
 		}
 	})
-当然还有追求更简洁的方法，这个在实际开发中用的比较多。
-angular.module('firstModule',[]).controller('firstController',function(){
-	
-}).directive('firstDirective',function(){
-	return {
-		.....
-	}
-})
+	当然还有追求更简洁的方法，这个在实际开发中用的比较多。
+	angular.module('firstModule',[]).controller('firstController',function(){
+		
+	}).directive('firstDirective',function(){
+		return {
+			.....
+		}
+	})
 
 
 
