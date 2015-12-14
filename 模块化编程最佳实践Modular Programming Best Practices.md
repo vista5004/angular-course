@@ -1,8 +1,8 @@
-当你把你的项目源码分为不同的模块的时候，一般由两个选择：
-（1）通过层来实现模块化（2）通过特征来实现模块化
-首先我们进入angular seed项目，下面是这个项目在github上的地址，这是一个不错的angular项目，大家可以学习一下。
-（https://github.com/angular/angularseed/tree/69c9416c8407fd5806aab3c63916dfcf0522ecbc）
-文件的app/js文件中，看看采用的哪种模式，当你打开文件夹，你会看到如下几个文件
+当你把你的项目源码分为不同的模块的时候，一般由两个选择：<p>
+（1）通过层来实现模块化（2）通过特征来实现模块化<p>
+首先我们进入angular seed项目，下面是这个项目在github上的地址，这是一个不错的angular项目，大家可以学习一下。<p>
+（https://github.com/angular/angularseed/tree/69c9416c8407fd5806aab3c63916dfcf0522ecbc）<p>
+文件的app/js文件中，看看采用的哪种模式，当你打开文件夹，你会看到如下几个文件<p>
 ```
 1、app.js 
 2、controller.js
