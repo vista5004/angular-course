@@ -20,10 +20,19 @@ angular.module('myApp',[])
     //在这里使用依赖
   });
 </code></pre>
-当实例化控制器的时候，AngularJS会读取参数列表，并且从这些名字中可以指定哪些需要被依赖注入。你也需要注意到AngularJS自己自带的服务前缀是以$为命名约定的。所以你不应该以$作为你服务的前缀。
+当实例化控制器的时候，AngularJS会读取参数列表，并且从这些名字中可以指定哪些需要被依赖注入。你也需要注意到AngularJS自己自带的服务前缀是以$为命名约定的。所以你不应该以$作为你服务的前缀。<br>
 
-
-
+&lt;!DOCTYPE html&gt; <br>
+&lt;html ng-app="myApp"&gt;<br>
+&lt;head &gt;<br>
+&lt;script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js" &gt;&lt;/script&gt;<br>
+&lt;script src="app.js"&gt;&lt;/script&gt;<br>
+&lt;/head&gt;<br>
+&lt;body ng-controller="GreetingController"&gt;<br>
+{{greeting}} User! The current date/time is <span>{{now | date:'medium'}}&lt;/span&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;<br>
+在这里我们把angular的ng-controller指令加入到HTML中，这意味着在&lt;body&gt;&lt;/body&gt;标签之间的所有内容均在控制器的作用域下。每次ng-controller检测，AngularJS为这个特殊的控制器和实例创造一个新的作用域。所以当ng-controller="GreetingController"遇到这个构造方法GreetingController运行的时候，为作用域下的两个模型：greeting和now赋值。
 
 
 
