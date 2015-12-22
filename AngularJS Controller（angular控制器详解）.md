@@ -32,9 +32,9 @@ angular.module('myApp',[])
 {{greeting}} User! The current date/time is <span>{{now | date:'medium'}}&lt;/span&gt;<br>
 &lt;/body&gt;<br>
 &lt;/html&gt;<br>
-在这里我们把angular的ng-controller指令加入到HTML中，这意味着在&lt;body&gt;&lt;/body&gt;标签之间的所有内容均在控制器的作用域下。每次ng-controller检测，AngularJS为这个特殊的控制器和实例创造一个新的作用域。所以当ng-controller="GreetingController"遇到这个构造方法GreetingController运行的时候，为作用域下的两个模型：greeting和now赋值。
-
-
+在这里我们把angular的ng-controller指令加入到HTML中，这意味着在&lt;body&gt;&lt;/body&gt;标签之间的所有内容均在控制器的作用域下。每次ng-controller检测，AngularJS为这个特殊的控制器和实例创造一个新的作用域。所以当ng-controller="GreetingController"遇到这个构造方法GreetingController运行的时候，为作用域下的两个模型：greeting和now赋值。在视图中我们可以通过表达式{{}}来获取值。当我们写{{greeting}}AngularJS会用这个已经存在greeting属性的值来替代它。对于now模型来说也是如此。无论在{{}}里写的是什么，都要能和scope对应上。<br>
+当你在浏览器里运行HTML的时候你应该看到如下
+Hello, User! The current date/time is <current date & time here>.
 
 
 
