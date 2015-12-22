@@ -13,7 +13,14 @@ angular.module('myAPP',[])
 </code></pre>
 通过在angular.module()上调用controller()来注册一个控制器。这个控制器需要两个参数：第一个参数是这个控制器的名字，第二个是当在html中执行到ng-controller指令时被调用的实例方法。能够忽略这个实例方法中的作用域$scope参数吗？当你声明这个$scope作为一个控制器实例的参数，你就表明你的控制器是依赖于这个$scope对象的。这个$scope的参数有特殊意义。AngularJS根据实例方法参数的名字来推断这个控制器的依赖。在这个例子中，当AngularJS在HTML文件中找到ng-controller='GreetingController'这个指令时，AngularJs会为控制器创建一个新的作用域，当实例化这个方法时，AngularJS会传递这个作用域作为一个参数到这个实例方法。这叫做依赖注入，是AngularJS的核心。我们将会在后面的章节中讨论依赖注入的话题。
 ######多个依赖
-能够为控制器设置多个依赖关系，并且能够声明这些依赖作为参数传递到构造方法中。为了增加$scope，每个AngularJS应用都有一个一个$rootScope
+能够为控制器设置多个依赖关系，并且能够声明这些依赖作为参数传递到构造方法中。为了增加$scope，每个AngularJS应用都有一个一个$rootScope。我们假设你有一个普通的服务用来通过XHR连接后端。你可以声明这两个服务依赖，像如下一样：
+<pre><code>
+angular.module('myApp',[])
+  .controller(ControllerWithDependency',function($rootScope,customService){
+    //在这里使用依赖
+  });
+</code></pre>
+当实例化控制器的时候，AngularJS会读取参数列表，并且从这些名字中可以指定哪些需要被依赖注入。你也需要注意到AngularJS自己自带的服务前缀是以$为命名约定的。所以你不应该以$作为你服务的前缀。
 
 
 
