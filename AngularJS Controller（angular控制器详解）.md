@@ -36,11 +36,36 @@ angular.module('myApp',[])
 在这里我们把angular的ng-controller指令加入到HTML中，这意味着在&lt;body&gt;&lt;/body&gt;标签之间的所有内容均在控制器的作用域下。每次ng-controller检测，AngularJS为这个特殊的控制器和实例创造一个新的作用域。所以当ng-controller="GreetingController"遇到这个构造方法GreetingController运行的时候，为作用域下的两个模型：greeting和now赋值。在视图中我们可以通过表达式{{}}来获取值。当我们写{{greeting}}AngularJS会用这个已经存在greeting属性的值来替代它。对于now模型来说也是如此。无论在{{}}里写的是什么，都要能和scope对应上。<br>
 当你在浏览器里运行HTML的时候你应该看到如下<br>
 Hello, User! The current date/time is <current date & time here>.
-
-
-
-
-
+##添加逻辑到控制器
+除了操作用户输入和为控制器赋值，一个控制器也为$scope添加方法，这些方法表现某种类型的逻辑并且和服务一起封装应用的业务数据。
+为了明白这些，让我们为$scope添加一个方法，并且在一个随机的语言中返回greeting的值。下面是如何定义控制器：
+```
+angular.module('myApp',[])
+  .controller('GreetingController',function($scope){
+    $scope.now=new Date();
+    $scope.helloMessages = ['Hello', 'Bonjour', 'Hola', 'Ciao',Hallo'];
+    $scope.greeting = $scope.helloMessages[0];
+    $scope.getRandomHelloMessage=function(){
+      $scope.greeting=$scope.helloMessages[parseInt(Math.random()*$scope.helloMessages.length)]
+    }
+  })
+```
+这里我们把helloMessages字符数组数组添加到$scope当前作用域上，表示hello五种语言的表达。我们也为当前作用域$scope上附加了getRandomHelloMessage()方法随机选择一个信息并且赋值给作用域下greeting模型。作为数据绑定的结果，当$scope.greeting被更新，在视图层表达式{{greeting}}也会被改变。
+相应的视图是
+&lt;!DOCTYPE html&gt;
+&lt;html ng-app="myApp"&gt;
+&lt;head&gt;
+&lt;script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"&gt;&lt;/script>
+&lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body ng-controller="GreetingController"&gt;
+{{greeting}} User! The current date/time is &lt;span>{{now | date:'medium'}}&lt;/span&gt;.
+&lt;br/&gt;
+&lt;button ng-click="getRandomHelloMessage()"&gt;Random Hello Message&lt;/button&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+这里我们增加了一个HTML按钮用来通过调用在控制器的作用域上getRandomHelloMessage()方法来响应点击事件。反过来，这个方法改变greeting模型的值。所以这个变化被反射到视图层。
+诚然，这个例子是沈简单的。
 
 
 
