@@ -66,11 +66,42 @@ angular.module('myApp',[])
 &lt;/body&gt;<br>
 &lt;/html&gt;<br>
 这里我们增加了一个HTML按钮用来通过调用在控制器的作用域上getRandomHelloMessage()方法来响应点击事件。反过来，这个方法改变greeting模型的值。所以这个变化被反射到视图层。<br>
-诚然，这个例子是沈简单的。<br>
+诚然，这个例子是很简单的。<br>
 但是我们学习到了基本的控制器和如何使用它，现在我们来讨论，控制器不该做什么。
 + 不要进行DOM操作，DOM操作应该在指令中进行。
-+ 
-+ 
++ 不要在控制器中格式化模型的值，过滤器的作用就在此，我们已经见过内置过滤器的操作。
++ 不要在控制器中写重复的代码。而是要封装到服务中，例如你要在多个地方从服务中获取数据。所以你与其在控制器中重复代码，不如把代码封装在服务中，当需要的时候注入到控制器中。当所有的控制器线程处理完用户输入后，为当前作用域$scope设置属性和方法，并且和服务进行交互来表现业务逻辑。<br>
+控制器应该做：
++通过为控制器附加模型来设定$scope的初始状态，
++为作用域附加方法用来处理任务。
+##为控制器附加实例方法和属性
+尽管控制器经常为作用域设置方法和属性，你也可以为控制器创建一个实例方法和属性。记住，AngularJS实例化你的控制器通过调用你提供的构造方法。这意味着你有创建实例属性和实例方法的自由。让我们定义以前的控制器，用实例属性代替作用域模型。
+```
+angular.module('myApp',[])
+  .controller('GreetingController',function($scope){
+    this.now=new date();
+    this.helloMessage=['Hello', 'Bonjour', 'Ola', 'Ciao', 'Hallo'];
+    this.greeting = this.helloMessages[0];
+    this.getRandomHelloMessage = function() {this.greeting = this.helloMessages[parseInt((Math.random()*this.helloMessages.length))];
+  }
+})
+```
+在视图层有一个小调整。<br>
+&lt;!DOCTYPE html&gt;<br>
+&lt;html ng-app="myApp"&gt;<br>
+&lt;head&gt;<br>
+&lt;script type='text/javascript'<br> src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"&gt;&lt;/script&gt;<br>
+&lt;script src="app.js"&gt;&gt;/script&gt;<br>
+&lt;/head&gt;<br>
+&lt;body ng-controller="GreetingController as greetingController"&gt;<br>
+{{greetingController.greeting}} User! The current date/time is&lt;span&gt;{{greetingController.now | date: 'medium'}}&lt;/span&gt;.<br>
+&lt;br/&gt;<br>
+&lt;button ng-click="greetingController.getRandomHelloMessage()"&gt;Random Hello Message&lt;/button&gt;<br>
+&lt;/body &gt;<br>
+&lt;/html &gt;<br>
+
+
+
 
 
 
