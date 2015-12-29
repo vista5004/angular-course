@@ -52,18 +52,18 @@ angular.module('myApp',[])
 ```
 这里我们把helloMessages字符数组数组添加到$scope当前作用域上，表示hello五种语言的表达。我们也为当前作用域$scope上附加了getRandomHelloMessage()方法随机选择一个信息并且赋值给作用域下greeting模型。作为数据绑定的结果，当$scope.greeting被更新，在视图层表达式{{greeting}}也会被改变。
 相应的视图是
-&lt;!DOCTYPE html&gt;
-&lt;html ng-app="myApp"&gt;
-&lt;head&gt;
-&lt;script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"&gt;&lt;/script>
-&lt;script src="app.js"&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body ng-controller="GreetingController"&gt;
-{{greeting}} User! The current date/time is &lt;span>{{now | date:'medium'}}&lt;/span&gt;.
+&lt;!DOCTYPE html&gt;<br>
+&lt;html ng-app="myApp"&gt;<br>
+&lt;head&gt;<br>
+&lt;script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"&gt;&lt;/script&gt;
+&lt;script src="app.js"&gt;&lt;/script&gt;<br>
+&lt;/head&gt;<br>
+&lt;body ng-controller="GreetingController"&gt;<br>
+{{greeting}} User! The current date/time is &lt;span&gt;{{now | date:'medium'}}&lt;/span&gt;.<br>
 &lt;br/&gt;
-&lt;button ng-click="getRandomHelloMessage()"&gt;Random Hello Message&lt;/button&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+&lt;button ng-click="getRandomHelloMessage()"&gt;Random Hello Message&lt;/button&gt;<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;<br>
 这里我们增加了一个HTML按钮用来通过调用在控制器的作用域上getRandomHelloMessage()方法来响应点击事件。反过来，这个方法改变greeting模型的值。所以这个变化被反射到视图层。
 诚然，这个例子是沈简单的。
 
