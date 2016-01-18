@@ -102,6 +102,22 @@ angular.module('myApp',[])
 这个GreetingController作为控制器完成了变换。这个作为关键字给GreetingController的实例设置作用域。所以作为关键字把控制器暴露给视图层。并且作为结果，我们能够通过这个reference参数获取这个实例的变量和方法。<br>
 不是所有的开发者，支持这个实现方法。让我们看看作为关键字什么是好的什么是坏的。<br>
 ######缺点<p>
++在许多案例中暴露整个控制器实例不是一个好的方法。这个作用域对象清楚的存在于控制器和视图层之间。<br>
++这个实现方法不是主流的，并且也需要更多的代码。<br>
+######优点<p>
++当控制器是嵌套的，并且内层和外层控制器作用域对于模型有相同的名字，作为关键字就派上用场了。<br>
+```
+<div ng-controller='OuterController as outer'>
+<div ng-controller='InnerController as inner'>
+Outer={{outer.someModel}} and inner={{inner.someModel}}
+```
+
+
+
+
+
+
+
 
 
 
