@@ -101,10 +101,10 @@ angular.module('myApp',[])
 &lt;/html &gt;<br>
 这个GreetingController作为控制器完成了变换。这个作为关键字给GreetingController的实例设置作用域。所以作为关键字把控制器暴露给视图层。并且作为结果，我们能够通过这个reference参数获取这个实例的变量和方法。<br>
 不是所有的开发者，支持这个实现方法。让我们看看作为关键字什么是好的什么是坏的。<br>
-######缺点<p>
-+在许多案例中暴露整个控制器实例不是一个好的方法。这个作用域对象清楚的存在于控制器和视图层之间。<br>
-+这个实现方法不是主流的，并且也需要更多的代码。<br>
-######优点<p>
+######缺点
++在许多案例中暴露整个控制器实例不是一个好的方法。这个作用域对象清楚的存在于控制器和视图层之间。
++这个实现方法不是主流的，并且也需要更多的代码。
+######优点
 +当控制器是嵌套的，并且内层和外层控制器作用域对于模型有相同的名字，作为关键字就派上用场了。<br>
 ```
 <div ng-controller='OuterController as outer'>
@@ -112,8 +112,17 @@ angular.module('myApp',[])
 Outer={{outer.someModel}} and inner={{inner.someModel}}
 ```
 ##在控制器中使用依赖注入<p>
-我们已经见过如何把依赖注入到控制器中，AngularJS从构造函数的参数的名字来推断控制器的依赖，当部署代码的时候压缩Javascipt代码，
-
+我们已经见过如何把依赖注入到控制器中，AngularJS从构造函数的参数的名字来推断控制器的依赖，当部署代码的时候压缩Javascipt代码，这个参数的名字将会缩短，结果AngularJS将会无法识别出依赖。这种情况，你有两个选择来理清依赖当压缩代码的时候，让我们来检查这两种方法。
+```
+function DemoController($rootScope,$scope,$http){
+  
+}
+DemoController.$inject=['$rootScope','$scope','$http'];
+angular.module('myApp',[])
+  .controller('DemoController',DemoController)
+```
+这个$inject属性表明控制器到构造函数参数之间的依赖关系。<br>
+第二个选择在开发者中更受欢迎。你可以在angular.module()中第二个参数传递一个数组，而不是传递一个构造函数。这个数组存储依赖的名字，数组中的最后一项就是控制器构造函数的方法。这里我们如何做。
 
 
 
