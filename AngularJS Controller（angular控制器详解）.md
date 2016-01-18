@@ -99,9 +99,9 @@ angular.module('myApp',[])
 &lt;button ng-click="greetingController.getRandomHelloMessage()"&gt;Random Hello Message&lt;/button&gt;<br>
 &lt;/body &gt;<br>
 &lt;/html &gt;<br>
-这个GreetingController作为控制器完成了变换。这个作为关键字给GreetingController的实例设置作用域。所以作为关键字把控制器暴露给视图层。并且作为结果，我们能够通过这个reference参数获取这个实例的变量和方法。
-不是所有的开发者，支持这个实现方法。让我们看看作为关键字什么是好的什么是坏的。
-#########缺点
+这个GreetingController作为控制器完成了变换。这个作为关键字给GreetingController的实例设置作用域。所以作为关键字把控制器暴露给视图层。并且作为结果，我们能够通过这个reference参数获取这个实例的变量和方法。<br>
+不是所有的开发者，支持这个实现方法。让我们看看作为关键字什么是好的什么是坏的。<br>
+######缺点<p>
 
 
 
