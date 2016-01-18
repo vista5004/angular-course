@@ -21,7 +21,7 @@ angular.module('myApp',[])
   });
 </code></pre>
 当实例化控制器的时候，AngularJS会读取参数列表，并且从这些名字中可以指定哪些需要被依赖注入。你也需要注意到AngularJS自己自带的服务前缀是以$为命名约定的。所以你不应该以$作为你服务的前缀。<br>
-
+<br>
 &lt;!DOCTYPE html&gt; <br>
 &lt;html ng-app="myApp"&gt;<br>
 &lt;head &gt;<br>
@@ -111,7 +111,8 @@ angular.module('myApp',[])
 <div ng-controller='InnerController as inner'>
 Outer={{outer.someModel}} and inner={{inner.someModel}}
 ```
-
+##在控制器中使用依赖注入<p>
+我们已经见过如何把依赖注入到控制器中，AngularJS从构造函数的参数的名字来推断控制器的依赖，当部署代码的时候压缩Javascipt代码，
 
 
 
