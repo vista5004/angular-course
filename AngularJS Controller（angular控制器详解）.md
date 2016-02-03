@@ -162,7 +162,35 @@ angular.module('myApp',[])
 3、我们已经把ng-modal指令附加到input元素上。这是基本的双向数据绑定。当你在input输入框输入东西的时候，这个作用域自动更新。所以，这样你就不必要手动为input输入框写一个keyup事件句柄来更新数据。<br>
 4、 {{name}}被绑定在模型层数据上作为一个表达式被视图层单向知道。这就是双向数据绑定的第二个方面，表达式监听着作用域模型值，并且更新这个DOM，当值变化的时候。<br>
 5、所以当我们在input输入框输入内容的时候，作用域模型层数据发生变化，在视图层中的表达式{{name}}，当name属性发生变化会自动更新。<br>
-
+##做一些酷酷的事情
+当事情变得复杂一点点时候数据绑定的能力就变得明显了。所以，让我们干点酷酷的事情，比如说，你已经被赋予了以下的任务。<br>
+1.为使用者提供一个input输入框用来输入facebook账号。<br>
+2.只要使用者输入完成，显示相应的facebook资料图片。<br>
+唯一的约束是让代码的数量行数最小化，这个第一个选择是使用纯javascript代码（或者使用jquery）。所以，打开你的编辑器，写下这些代码为了这些功能，然后回到这里。但是我给你一个线索，这个接下来的URL，返回一个facebook的资料图片。Facebook ID: https://graph.facebook.com/[id here]/picture?type=normal.<br>
+纯javascript代码。<br>
+```
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The Plain JS Way</title>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded',function(e){
+    doucument.getElementById('fbID').addEventListener('keyup',function(event){
+      var fbID=document.getElementById('fbID').value;
+      var pictureURL='https://graph.facebook.com/' + fbID +'/picture?type=normal';
+      document.getElementById('profilePic').src=pictureURL;
+    })
+  })
+</script>
+</head>
+<body>
+<input type="text" id="fbID" />
+<br/>
+<span><img src="" title="fb image" id="profilePic"/></span>
+</body>
+</html>
+```
 
 
 
