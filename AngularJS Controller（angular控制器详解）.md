@@ -191,7 +191,24 @@ angular.module('myApp',[])
 </body>
 </html>
 ```
-
+在AngularJS中使用双向绑定
+```
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+<meta charset="utf-8">
+<title>Two way data binding</title>
+</head>
+<body ng-init="fbID='sandeep.panda92'">
+  <input type="text" ng-modal="fbID"><br/>
+  <span><img ng-src="https://graph.facebook.com/{{fbID}}picture?type=normal"/></span>
+  <script src="lib/angular/angular.js"></script>
+</body>
+</html>
+```
+当你看到angularJS的版本的时候会有一点混乱。那这是如何造成的。数据双向绑定的威力刚刚显示出来。我们先来了解场景背后的内容：<br>
+1.当我们在input输入的时候，多亏了AngularJS这个fbID模型就会更新。<br>
+2.当我们在视图中使用表达式{{fbID}}，当fbID模型的值会更新它自己，这样会显示出新图标。<br>
 
 
 
