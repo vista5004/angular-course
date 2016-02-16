@@ -16,3 +16,19 @@ var myObject={name:'AngularJS',creator:'Misko'}
 ```
 $rootscope是所有scope作用域的父及。结果是，所有附加在$rootscope上的属性能够被scope隐式的获取。<br>
 如果你仔细观察上面的代码，你会发现scpe作用域以一种作用域和DOM元素相关联的形式混合嵌套在一起的形式。最重要的是AngularJS的scope作用域继承是继承两者之间的原型。Javascript不像其他的编程语言一样，例如Java、C++、c#，不支持传统的继承。Javascipt用不同的方法来实现，并且简单和易于使用。每一个javascript构造函数都有一个pototype属性，直接指向对象。当你获取一个对象上的属性(someObject.somePrototype)，javascript会在这个对象上搜寻这个属性。这个prototype原型属性就是一个对象。如果在原型prototype上找到就会返回。如果没有找到，这个搜寻就会沿着原型链往上寻找，知道这个属性被找到或者Object.prototype被找到。下面这个例子会给出原型继承的一个了解。<br>
+```
+function Car (color,steering){
+  this.color=color;
+  this.steering=steering;
+}
+Car.prototype.year=2012;
+var car=new Car('red',left);
+console.log(car.color) //print the color form car
+console.log(car.year)  //print the year form Car.prototype
+console.log(car.hasOwnPrototype(year)) //return false
+```
+
+
+
+
+
