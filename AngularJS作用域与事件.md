@@ -27,6 +27,7 @@ console.log(car.color) //print the color form car
 console.log(car.year)  //print the year form Car.prototype
 console.log(car.hasOwnPrototype(year)) //return false
 ```
+正如你看到的，这个color属性在car的对象上被找到并且返回了。但是car对象上没有year的属性。所以Javascipt会在Car的原型上搜索，找到后并返回。所以无论你在构造函数上设置什么属性，将会通过实例来获取他。<br>
 
 
 
