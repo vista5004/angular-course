@@ -28,7 +28,16 @@ console.log(car.year)  //print the year form Car.prototype
 console.log(car.hasOwnPrototype(year)) //return false
 ```
 正如你看到的，这个color属性在car的对象上被找到并且返回了。但是car对象上没有year的属性。所以Javascipt会在Car的原型上搜索，找到后并返回。所以无论你在构造函数上设置什么属性，将会通过实例来获取他。<br>
-
+##访问prototype
+当我们讨论对象中的值的时候，就变得有趣起来。让我们一起看两个例子。<br>
+####写一个原始的对象
+我们的对象car没有year属性，但是Car.prototype有。当你试图读取car.year，你会从Car.prototype中读取到。但是你仍然可以像这样获取year
+```
+car.year=2000;
+console.log(car.year);//从car的对象上获取，而不是原型上
+console.log(car.hasOwnPrototy('year'))//返回true，由于car有自己的属性
+```
+当你附加一个新属性到这个对象上，这个属性就直接附加到这个对象上了，而不是其原型prototype上。随后当你访问这个属性的时候，Javascript也不再访问这个对象的原型，因为会在这个对象本身上直接找到。<br>
 
 
 
