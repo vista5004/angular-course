@@ -118,8 +118,9 @@ angular.module('myApp.controllers').controller('BookController', function($scope
 <script src="js/controllers.js"></script>
 </html>
 ```
-
-
-
+在上面的代码中，当所有的模块加载完成后，这个回调传入angular.module('myApp').run()来触发。在里面我们设置了一个$rootscope的tittle属性，这是我们的页面的名字。第二个是用来识别这个scope。我们有两个控制器：SiteController and BookController，通过后者的控制器被嵌套在前者的控制器中。<p>
+现在我们要可视化scope的层次，你已经安装了Angular Batarang了吧。你将会需要它来实现scope层次可视化，所以你必须装上它。<p>
+现在启动这个服务器通过node scripts/web-server.js命令。服务器一旦启动就在浏览器中输入http://localhost:8000/app/scopes.html.打开这个开发者工具在最下面将会发现AngularJS。然后刷新这个页面。<p>
+####先进的Scope内容
 
 
