@@ -56,4 +56,17 @@ console.log(Object.getPrototypeOf(ferrari)); //Car {}
 ```
 <code>Object.create()</code>创建了一个新的对象，其内部的__proto__ 属性直接指向作为第一个参数函数对象。结果ferrari对象的__proto__指向了<code>car</code>，所以ferrari拥有car实例对象的所有属性。<p>
 我们快速的过了一遍属性的继承，现在让我们看看AngularJS如何利用这个在scope中实现继承。<p>
-
+#### AngularJS Scopes中的原型继承
+$rootScope有一个叫做$new()的方法用来创建新的子作用域。前面那个例子中我们混合了两个控制器，其中一个的作用域就是$rootScope。下面是代码：<p>
+```
+<div ng-app> <!-- creates a $rootScope -->
+  <div ng-controller="OuterController"> <!--creates a scope(call it scope 1) that inherits from $rootScope-->
+    <div ng-controller="InnerController"> <!-- Creates achild scope (call it scope 2) that inherits from scope 1
+    </div>
+  </div>
+</div>
+```
+下面是AngularJS的scope的层次结构。
+1.Angularjs找到ng-app后会创建$rootScope对象。<br>
+2.当$rootScope遇到ng-controller的时候，找到并指向OuterController。所以，它会调用$rootScope.$new()，用来创建一个子scope $scope1，来继承$rootscope。在这一点上这个子作用域的prototype(__proto__)指向了$rootScope。所以任何附加在$rootScope上的属性都能够被子scope获取。如果OuterController通过给声明的构造函数增加一个参数$scope来实现声明依赖。AngularJS用最新创建的子$scope来触发它。<br>
+3.当遍历DOM的时候，AngularJS遇到另外一个ng-controller指令指向InnerController。现在它会创建另外一个子作用域scope，继承上一层级的$scope。像从前那样在$scope1引用$new()创建一个新的子scope $scope2。这样继承的结果是$scope2能够获取$scope1的所有属性。<br>
