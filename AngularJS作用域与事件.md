@@ -121,6 +121,52 @@ angular.module('myApp.controllers').controller('BookController', function($scope
 在上面的代码中，当所有的模块加载完成后，这个回调传入angular.module('myApp').run()来触发。在里面我们设置了一个$rootscope的tittle属性，这是我们的页面的名字。第二个是用来识别这个scope。我们有两个控制器：SiteController and BookController，通过后者的控制器被嵌套在前者的控制器中。<p>
 现在我们要可视化scope的层次，你已经安装了Angular Batarang了吧。你将会需要它来实现scope层次可视化，所以你必须装上它。<p>
 现在启动这个服务器通过node scripts/web-server.js命令。服务器一旦启动就在浏览器中输入http://localhost:8000/app/scopes.html.打开这个开发者工具在最下面将会发现AngularJS。然后刷新这个页面。<p>
-####先进的Scope内容
+####进阶的Scope内容
+上面我们谈论基本的scope特性，这里有一些scope的高级用法能够提升angularjs世界的能力,让我们一一介绍。<p>
+######AngularJS中的监听器
+这个监听器监视模型变化，并且反应出来。<p>
+<code>$scope</code>对象有一个<code>$watch</code>方法，用来注册一个监视器。修改以前的代码段，给使用在书单上增加书的能力。当我们增加两倍书的时候，希望可以给出一个恭喜的信息。所以我们可以保持一个counter计数器，然后每次点击增加按钮的时候，增加这个计数器。但是我们如何知道增加了两个数呢。这就需要watcher来帮助，我们在conuter计数器模型上启动一个监听器，然后当model变化的时候通知我们，所以当这个值是2的时候，弹出alert弹窗。代码如下：
+```
+<body ng-controller="SiteController">
+  <span>{{publisher}} excels in {{type}} books</span>
+  <div ng-controller="BookController">
+    <h3>Some of the popular books from {{publisher}}</h3>
+    My Wish List Count: {{wishListCount}}
+    <ul>
+      <li ng-repeat="book in books">
+      {{book}}. <a href="#" ng-click="addToWishList(book)">Add toWish List</a>
+      </li>
+    </ul>
+  </div>
+</body>
+```
+为了简洁只写了body内的代码，controller中的代码如下：
+```
+angular.module('myApp.controllers').controller('BookController', function($scope) {
+    $scope.books = ['Jump Start HTML5','Jump Start CSS','Jump Start Responsive Web Design'];
+    $scope.name="Scope for BookController";
+    $scope.addToWishList=function(book){
+    $scope.wishListCount++;
+  };
+    $scope.wishListCount=0;
+    $scope.$watch('wishListCount',function(newValue,oldValue){
+    console.log('called '+newValue+' times');
+    if(newValue==2){
+      alert('Great! You have 2 items in your wish list. Time to buy what you love. ');
+    }
+  });
+});
+```
+在<code>BookController</code>中增加一个<code>wishListCounter</code>模型。每一次点击<code>wishListCounter</code>都会被唤醒，一次次增加这个model。下面介绍<code>$scope.$watcher()</code><p>
+<code>$scope.$watcher()</code>需要做的是，第一个参数监听表达式，可以是监听下的一个模型或者一个方法，第二个参数是回调函数，当AngularJs检测到model发生改变的时候返回这个旧值。总体来说，第一个值是新值，第二个是旧值。如果只使用新值，第二个值可以忽略。
+
+
+
+
+
+
+
+
+
 
 
