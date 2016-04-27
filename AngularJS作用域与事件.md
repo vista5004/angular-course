@@ -158,9 +158,9 @@ angular.module('myApp.controllers').controller('BookController', function($scope
 });
 ```
 在<code>BookController</code>中增加一个<code>wishListCounter</code>模型。每一次点击<code>wishListCounter</code>都会被唤醒，一次次增加这个model。下面介绍<code>$scope.$watcher()</code><p>
-<code>$scope.$watcher()</code>需要做的是，第一个参数监听表达式，可以是监听下的一个模型或者一个方法，第二个参数是回调函数，当AngularJs检测到model发生改变的时候返回这个旧值。总体来说，第一个值是新值，第二个是旧值。如果只使用新值，第二个值可以忽略。
-
-
+<code>$scope.$watcher()</code>需要做的是，第一个参数监听表达式，可以是监听下的一个模型或者一个方法，第二个参数是回调函数，当AngularJs检测到model发生改变的时候返回这个旧值。总体来说，第一个值是新值，第二个是旧值。如果只使用新值，第二个值可以忽略。<p>
+在这个<code>watch</code>回调函数中，我们需要检查这个是否是两个参数，加入我们展现一个alert弹窗，同时加入一个<code>console.log() </code>就得到有多少个监听函数被触发。<p>
+然而在<code>$watch</code>的第二个参数是自选的，我们将在下章讨论不需要监听器的<code>$watch()</code>。这个<code>$watch()</code>函数可以接受自选的第三个参数是否深度监听。在这个例子中，我们需要监听一个简单的字符串，需要监听一个对象的变化。我们希望任何对象属性发生变化我们都会得到通知。在这个例子中代码不发生变化，因为Angularjs会比较对象的引用。为了让函数运行，我们把<code>$watch</code>的第三个参数设置为<code>true</code>。在变化的情况下会比较对象独立的属性。<p>
 
 
 
