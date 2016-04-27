@@ -161,9 +161,15 @@ angular.module('myApp.controllers').controller('BookController', function($scope
 <code>$scope.$watcher()</code>需要做的是，第一个参数监听表达式，可以是监听下的一个模型或者一个方法，第二个参数是回调函数，当AngularJs检测到model发生改变的时候返回这个旧值。总体来说，第一个值是新值，第二个是旧值。如果只使用新值，第二个值可以忽略。<p>
 在这个<code>watch</code>回调函数中，我们需要检查这个是否是两个参数，加入我们展现一个alert弹窗，同时加入一个<code>console.log() </code>就得到有多少个监听函数被触发。<p>
 然而在<code>$watch</code>的第二个参数是自选的，我们将在下章讨论不需要监听器的<code>$watch()</code>。这个<code>$watch()</code>函数可以接受自选的第三个参数是否深度监听。在这个例子中，我们需要监听一个简单的字符串，需要监听一个对象的变化。我们希望任何对象属性发生变化我们都会得到通知。在这个例子中代码不发生变化，因为Angularjs会比较对象的引用。为了让函数运行，我们把<code>$watch</code>的第三个参数设置为<code>true</code>。在变化的情况下会比较对象独立的属性。<p>
-
-
-
+####  $watchCollection()函数
+在许多情况下，除了监听一个对象外，你还需要监听一个对象集合，例如一个数字一个对象。这样你就需要<code>$watchCollection()</code>函数。在这个例子中你监听一个数组，当一个新的对象添加到数组中或者移除一个已存在的对象移除或者更新，你的监听函数都会被触发。对于对象，如果属性发生增加或者移除，这个监听器将也会被触发。下面是示例代码：<br>
+```
+$scope.$watchCollection('myCollection',function(newCollection,oldCollection){
+    //handle the change
+    console.log(newCollection); //print new collection
+});
+```
+这不是监听器的最后，为了全面理解angularjs的监听器，你需要理解两个关键点：<code>$digest</code>和<code>$apply</code>。因为这些东西是相关的，为了全面的理解需要知道这些。<p>
 
 
 
