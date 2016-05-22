@@ -170,9 +170,14 @@ $scope.$watchCollection('myCollection',function(newCollection,oldCollection){
 });
 ```
 这不是监听器的最后，为了全面理解angularjs的监听器，你需要理解两个关键点：<code>$digest</code>和<code>$apply</code>。因为这些东西是相关的，为了全面的理解需要知道这些。<p>
-
-
-
-
+#### $apply()函数和$degist()循环
+下面有一个非常简单的代码段，是关于一个非常简单的AngularJS代码段关于在input中输入名字的。还有一个<code>div</code>来显示结果。<p>
+```
+<input id="input" type="text" ng-model="name"/>
+<div id="output">{{name}}</div>
+```
+你已经知道了<code>{{name}}</code>这样表达式的作用。提供一个单向的从model层到view层的绑定。在model层中的name发生变化的时候，在view层中的name自动变化。是不是感觉像魔法一般。仅仅是在model层上的name上添加了一个监听watcher。这个表达式是一种特殊的指令，在model模型上或者函数上绑定着一个监听器。目的是当model层中数据发送变化的时候，更新DOM值。<p>
+这仅仅是实现方法的一半。关键是AngularJS如何知道model发生变化，并且通知相应的监听器。是运行一个循环函数每隔一段时间来监听model值的变化吗？是通过AJAX来实现更新值的吗？<p>
+AngularJS $scope拥有一个<code>$apply()</code>方法，需要传进去一个参数。当model值发生变化的时候，<code>$apply()</code>中的值也会发生变化。所以需要做的是把需要监听的model放入到<code>$apply()</code>函数中当作参数，并调用它。当<code>$apply()</code>被调用的时候，AngularJS就会知道model值发生变化了。然后就会启动另外一个<degist循环<code>$rootScope.$digest()</code>循环函数，将会传递到子scope上。在这个<degist循环中，所有的监听器都会被调用来检测是否有model值发生变化。如果有一个值发生变化，对应的监听器就会被触发。现在该说一下监听器如何检测出数值的变化了。监听器通过表达式<code>{{}}</code>，根据model值来更新dom。在先前的例子中，我们展示了alert示例。<p>
 
 
